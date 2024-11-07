@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link';
+import Navbar from '../../../components/navbar/Navbar'
 import React, { useState, useEffect } from 'react';
 type catgoryType={
     id: number,
@@ -32,7 +32,9 @@ const CategoriesPage = () => {
   }
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="flex">
+        <Navbar />
+        <div className="p-8 bg-gray-100 min-h-screen w-[85%]">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Categories</h2>
        <button
@@ -80,6 +82,7 @@ const CategoriesPage = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };
