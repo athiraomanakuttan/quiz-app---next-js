@@ -7,7 +7,6 @@ type formDataType = {
   email: string;
   password: string;
 };
-
 const LoginPage = () => {
   const [enableLogin, setEnableLogin] = useState<boolean>(false);
   const [formData, setFormData] = useState<formDataType>({
@@ -32,6 +31,7 @@ const LoginPage = () => {
       const response = await axios.post('/api/login', formData);
       const data = response.data;
       if (data.status === 200) {
+        localStorage.setItem('token', data.token)
         router.push('/admin/home');
       } else {
         setError('Invalid credentials, please try again.');

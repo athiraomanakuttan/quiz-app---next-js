@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import jwt from 'jsonwebtoken';
 
-export async function POST(request:NextRequest) {
-  const body = await request.json(); // Properly parse request body
+export async function POST(request: NextRequest) {
+  const body = await request.json();
   const { email, password } = body;
+  
   if (!email || !password) {
     return NextResponse.json({ status: 400, message: "Invalid email or password" });
   } else if (process.env.ADMIN_EMAIL !== email) {
@@ -10,6 +12,7 @@ export async function POST(request:NextRequest) {
   } else if (process.env.ADMIN_PASSWORD !== password) {
     return NextResponse.json({ status: 400, message: "Invalid password" });
   } else {
-    return NextResponse.json({ status: 200, message: "Login success" });
+    const token = jwt.sign({ email }, process.env.JWT_TOKEN!,{ expiresIn: '1h' });
+    return NextResponse.json({ status: 200, message: "Login success", token });
   }
 }
