@@ -19,7 +19,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (formData.email.length > 0 && formData.password.length >= 6) {
       setEnableLogin(true);
-      setError(null);  // Reset error message when the form is valid
+      setError(null);  
     } else {
       setEnableLogin(false);
     }
