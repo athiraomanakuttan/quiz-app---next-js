@@ -13,21 +13,6 @@ export const GET = async () => {
     }
 };
 
-// export const POST = async (req:NextRequest)=>{
-//     const { categoryName } =  await req.json();
-//     try {
-//         if(!categoryModel)
-//             console.log("connection failed")
-//         else
-//             console.log("connection sucess")
-//         const checkData =  await categoryModel.find({category:categoryName})
-//         console.log(checkData)
-//         return NextResponse.json({status:200, message:"added category successfully"})
-//     } catch (error) {
-//         console.log(error)
-//         return NextResponse.json({status : 400 , error})
-//     }
-// }
 
 export const POST = async (req: NextRequest) => {
     await connect(); // Ensure connection before proceeding

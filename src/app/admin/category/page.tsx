@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../../../components/navbar/Navbar';
 import CategoryForm from '../../../components/categeoryForm/CategoryForm'; 
 import axios from 'axios';
+import { parseSetCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 type categoryType = {
-  id: number,
-  name: string,
-  dateAdded: string
+  _id: string,
+  category: string,
+  updatedAt: string
 }
 
 const CategoriesPage = () => {
@@ -16,7 +17,12 @@ const CategoriesPage = () => {
   const getCategoryData = async ()=>{
     try {
       const responce = await axios.get('/api/category')
-      console.log(responce.data)
+      if(responce.data.categories.length >0)
+        setCategories(responce.data.categories)
+      else 
+      setCategories([])
+
+
   } catch (error) {
     console.log("error fetching category data")
   }
@@ -25,8 +31,8 @@ const CategoriesPage = () => {
     getCategoryData()
   }, []);
 
-  const handleDelete = (id:number) => {
-    setCategories(categories.filter(category => category.id !== id));
+  const handleDelete = (id:string) => {
+    setCategories(categories.filter(category => category._id !== id));
   };
 
   const handleAddCategory = () => {
@@ -36,7 +42,9 @@ const CategoriesPage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const addQuestion = (id:number)=>{}
+  const addQuestion = (id:string)=>{
+    
+  }
 
   return (
     <div className="flex">
@@ -55,7 +63,7 @@ const CategoriesPage = () => {
         {isModalOpen && (
           <div className="fixed inset-0 flex justify-center items-center max-h-[20%] ">
             <div className="bg-white  rounded-lg shadow-lg w-full max-w-md m-24">
-              <CategoryForm />
+              <CategoryForm getCategoryData={getCategoryData}/>
               <button
                 onClick={closeModal}
                 className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-200 float-right mr-5"
@@ -79,13 +87,13 @@ const CategoriesPage = () => {
             </thead>
             <tbody>
               {categories.map((category, index) => (
-                <tr key={category.id} className="border-b border-gray-200 hover:bg-gray-100">
+                <tr key={category._id} className="border-b border-gray-200 hover:bg-gray-100">
                   <td className="py-3 px-6">{index + 1}</td>
-                  <td className="py-3 px-6">{category.name}</td>
-                  <td className="py-3 px-6">{category.dateAdded}</td>
+                  <td className="py-3 px-6">{category.category}</td>
+                  <td className="py-3 px-6">{category.updatedAt}</td>
                   <td className="py-3 px-6">
                     <button
-                      onClick={() => handleDelete(category.id)}
+                      onClick={() => handleDelete(category._id)}
                       className="bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition duration-200"
                     >
                       Delete
@@ -93,7 +101,7 @@ const CategoriesPage = () => {
                   </td>
                   <td className="py-3 px-6">
                     <button
-                      onClick={() => addQuestion(category.id)}
+                      onClick={() => addQuestion(category._id)}
                       className="bg-green-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition duration-200"
                     >
                       Add Question
