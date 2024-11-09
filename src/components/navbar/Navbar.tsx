@@ -16,7 +16,7 @@ const Navbar = () => {
          <Link href='/admin/category'> <FaList /> <span>Category</span></Link>
         </li>
         <li>
-            <FaQuestionCircle /> <span>Question</span>
+          <Link href='/admin/question'> <FaQuestionCircle /> <span>Question</span> </Link>
         </li>
         <li>        
             <FaChartBar /> <span>Result</span>

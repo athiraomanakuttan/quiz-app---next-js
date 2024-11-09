@@ -4,12 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../../../components/navbar/Navbar';
 import CategoryForm from '../../../components/categeoryForm/CategoryForm'; 
 import axios from 'axios';
-import { parseSetCookie } from 'next/dist/compiled/@edge-runtime/cookies';
-type categoryType = {
-  _id: string,
-  category: string,
-  updatedAt: string
-}
+import { parseSetCookie } from 'next/dist/compiled/@edge-runtime/cookies'; 
+import {categoryType} from '@/types/types'
+
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState<categoryType[]>([]);
