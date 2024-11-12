@@ -28,9 +28,7 @@ const CategoriesPage = () => {
     getCategoryData()
   }, []);
 
-  const handleDelete = (id:string) => {
-    setCategories(categories.filter(category => category._id !== id));
-  };
+  
 
   const handleAddCategory = () => {
     setIsModalOpen(true);
@@ -39,9 +37,7 @@ const CategoriesPage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const addQuestion = (id:string)=>{
-    
-  }
+  
 
   return (
     <div className="flex">
@@ -78,8 +74,6 @@ const CategoriesPage = () => {
                 <th className="py-3 px-6 text-left text-gray-600">#</th>
                 <th className="py-3 px-6 text-left text-gray-600">Category Name</th>
                 <th className="py-3 px-6 text-left text-gray-600">Date Added</th>
-                <th className="py-3 px-6 text-left text-gray-600">Actions</th>
-                <th className="py-3 px-6 text-left text-gray-600">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -88,22 +82,8 @@ const CategoriesPage = () => {
                   <td className="py-3 px-6">{index + 1}</td>
                   <td className="py-3 px-6">{category.category}</td>
                   <td className="py-3 px-6">{category.updatedAt}</td>
-                  <td className="py-3 px-6">
-                    <button
-                      onClick={() => handleDelete(category._id)}
-                      className="bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition duration-200"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                  <td className="py-3 px-6">
-                    <button
-                      onClick={() => addQuestion(category._id)}
-                      className="bg-green-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition duration-200"
-                    >
-                      Add Question
-                    </button>
-                  </td>
+                  
+                  
                 </tr>
               ))}
             </tbody>

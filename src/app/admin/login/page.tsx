@@ -32,6 +32,7 @@ const LoginPage = () => {
       const data = response.data;
       if (data.status === 200) {
         localStorage.setItem('token', data.token)
+        document.cookie = `token=${data.token}; path=/; max-age=3600;`;
         router.push('/admin/home');
       } else {
         setError('Invalid credentials, please try again.');

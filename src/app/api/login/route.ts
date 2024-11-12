@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
   } else if (process.env.ADMIN_PASSWORD !== password) {
     return NextResponse.json({ status: 400, message: "Invalid password" });
   } else {
+    
     const token = jwt.sign({ email }, process.env.JWT_TOKEN!,{ expiresIn: '1h' });
     return NextResponse.json({ status: 200, message: "Login success", token });
   }
