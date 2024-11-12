@@ -81,7 +81,8 @@ const CategoriesPage = () => {
                 <tr key={category._id} className="border-b border-gray-200 hover:bg-gray-100">
                   <td className="py-3 px-6">{index + 1}</td>
                   <td className="py-3 px-6">{category.category}</td>
-                  <td className="py-3 px-6">{category.updatedAt}</td>
+                  <td className="py-3 px-6">{category.updatedAt.split('T')[0]}</td>
+                  
                   
                   
                 </tr>

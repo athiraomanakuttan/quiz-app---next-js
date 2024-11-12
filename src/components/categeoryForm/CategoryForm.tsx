@@ -13,10 +13,12 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ getCategoryData }) => {
     try {
       const response = await axios.post('/api/category', { categoryName });
       console.log("Category added:", response.data);
+      alert(response.data.message)
       setCategoryName('');
       getCategoryData(); // Call the function to refresh categories
-    } catch (error) {
+    } catch (error:any) {
       console.log("Error adding category:", error);
+      alert(error.message)
     }
   };
 

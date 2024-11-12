@@ -35,9 +35,14 @@ const AddQuestionPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(!correctOption)
+    {
+      alert("Please mark the correct option");
+      return;
+    }
     const newQuestion = {
-      category: selectedCategory, // Match schema
-      question: question,         // Adjusted field name
+      category: selectedCategory, 
+      question: question,         
       options,
       correctOption
     };
@@ -45,14 +50,13 @@ const AddQuestionPage = () => {
       const response = await axios.post('/api/question', { newQuestion });
       if(response.data.status === 201)
         alert(response.data.message)
-      console.log(response.data)
-      console.log("Question added:", newQuestion);
       setSelectedCategory('');
       setQuestion('');
       setOptions(['', '', '', '']);
       setCorrectOption(null);
     } catch (error:any) {
       console.error("Error adding question:", error.response?.data || error.message);
+      alert(error.message)
     }
   };
   
