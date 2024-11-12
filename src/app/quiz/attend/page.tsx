@@ -22,7 +22,11 @@ const AttendQuizPage = () => {
       const data = response.data;
       setParticipantName(data.participantName!);
       setSelectedCategory(selectedCategory || '');
+      if(data.questions.length)
       setQuestions(data.questions!);
+      else
+      setQuestions([]);
+
     } catch (err) {
       console.log(err);
     }
@@ -73,8 +77,7 @@ const AttendQuizPage = () => {
   return (
     <div className="p-4 bg-gray-100 min-h-screen flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-4">Quiz for {participantName}</h1>
-      <p className="mb-4">Category: {selectedCategory}</p>
-
+    
       {currentQuestion ? (
         <div className="w-full max-w-xl bg-white p-10">
           <p className="text-lg font-semibold mb-4">{currentQuestionIndex + 1}. {currentQuestion.question!}</p>
@@ -105,7 +108,8 @@ const AttendQuizPage = () => {
           </button>
         </div>
       ) : (
-        <p>Loading questions...</p>
+        questions.length ? <p>Loading questions...</p> : <p>Sorry. No question available for this category</p>
+        
       )}
     </div>
   );

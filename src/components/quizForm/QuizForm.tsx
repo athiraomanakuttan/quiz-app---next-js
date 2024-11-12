@@ -28,8 +28,13 @@ const QuizForm = () => {
 
   const handleStartQuiz = async (e: React.FormEvent) => {
     e.preventDefault();
+    const nameRegex = /^[A-Za-z]{3,}$/;
     if (!participantName.trim() || !selectedCategory) {
       alert('Please enter your name and select a category.');
+      return;
+    }
+    else if(!nameRegex.test(participantName.trim())){
+      alert('Please enter a valid name');
       return;
     }
     try {
